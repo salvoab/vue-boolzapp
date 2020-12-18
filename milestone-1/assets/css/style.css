@@ -7,3 +7,64 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
 }
+
+#app{
+    position: relative;
+}
+
+.background-top{
+    height: 15vh;
+    background-color: #009789;
+}
+.background-app{
+    height: 85vh;
+    background-color: #d6dbd7;
+}
+
+/* container-app */
+.container-app{
+    width: 1200px;
+    height: 90%;
+    margin: auto;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    background-color: #eaeaea;
+}
+
+/* Sidebar */
+.sidebar{
+    width: 350px;
+    height: 100%;
+}
+
+.sidebar-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-right: 1px solid #b1b1b1;
+    padding: 10px;
+}
+
+.user img {
+    width: 60px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.box-icons{
+    width: 88px;
+    display: flex;
+    justify-content: space-around;
+    color: #b1b1b1;
+}
+
+/* Chat */
+.chat{
+    width: calc(100% - 350px);
+    height: 100%;
+    /*da togliere*/
+    background-color: lime;
+}
