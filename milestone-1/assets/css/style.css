@@ -189,7 +189,8 @@ body{
 
 .msg-send, .msg-received{
     width: max-content;
-    max-width: 300px;
+    min-width: 200px;
+    max-width: 320px;
     border-radius: 14px;
     margin: 10px 0;
     padding: 18px 14px 6px 14px;
