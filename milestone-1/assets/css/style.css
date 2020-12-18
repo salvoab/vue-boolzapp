@@ -180,8 +180,11 @@ body{
 /* Chat Main */
 .chat-main{
     height: calc(100% - 80px - 80px);
+    padding: 30px 60px;
     overflow-y: scroll;
     background-image: url('../img/mine.jpg');
+    display: flex;
+    flex-direction: column;
 }
 
 .msg-send, .msg-received{
@@ -193,14 +196,12 @@ body{
 }
 
 .msg-send{
-    position: relative;
-    left: 56%;
-    background-color: #d5f9ba
+    align-self: flex-end;
+    background-color: #d5f9ba;
 }
 
 .msg-received{
-    position: relative;
-    left: 8%;
+    align-self: flex-start;
     background-color: white;
 }
 
@@ -210,6 +211,7 @@ body{
     font-size: 12px;
     color: #b6bfbb;
 }
+
 /* Chat Footer */
 .chat-footer{
     height: 80px;
