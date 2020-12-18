@@ -122,6 +122,30 @@ body{
     border: 1px solid #b1b1b1;
 }
 
+/* Sidebar .contact-list*/
+.contact-list{
+    height: calc(100% - 50px - 80px - 80px);
+    overflow-y: scroll;
+}
+
+.contact-list > ul > li {
+    padding: 12px 20px;
+    display: flex;
+    background-color: white;
+    border-top: 2px solid  #eaeaea;
+}
+
+.contact-info{
+    margin-left: 20px;
+}
+.name{
+    font-size: 20px;
+}
+
+.contact-list > ul > li > img{
+    width: 64px;
+    border-radius: 50%;  
+}
 /*********/
 /* Chat */
 .chat{

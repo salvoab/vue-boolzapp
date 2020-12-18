@@ -48,6 +48,21 @@
                         <input type="text" placeholder="Cerca o inizia una nuova chat">
                     </div>
                     <!-- /.search-contact -->
+
+                    <!-- .contact-list -->
+                    <div class="contact-list">
+                        <ul>
+                            <li v-for="(contact, index) in contacts" v-if="contact.visible">
+                                <img :src="'./assets/img/avatar' + contact.avatar + '.jpg' ">
+                                <div class="contact-info">
+                                    <div class="name">{{contact.name}}</div>
+                                    <div class="time-stamp"></div>
+                                    <div class="last-message"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.contact-list -->
                 </aside>
                 <!-- /.sidebar -->
                 <div class="chat">
