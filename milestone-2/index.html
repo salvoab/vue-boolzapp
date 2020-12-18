@@ -72,7 +72,7 @@
                             <img :src="`./assets/img/avatar${contacts[activeUserIndex].avatar}.jpg`">
                             <div class="chat-info">
                                 <div class="name">{{contacts[activeUserIndex].name}}</div>
-                                <div class="last-access">Ultimo accesso oggi alle</div>
+                                <div class="last-access">Ultimo accesso {{getActiveDate()}} </div>
                             </div>
                         </div>
 
@@ -103,6 +103,7 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
         <script src="./assets/js/main.js"></script>
     </body>
 </html>

@@ -159,6 +159,21 @@ let app = new Vue({
     methods: {
         setActiveUser(position){
             this.activeUserIndex = position;
+        },
+        getActiveDate(){
+            const today = dayjs(new Date()).format('DD/MM/YYYY');
+            const lastMessageIndex = this.contacts[this.activeUserIndex].messages.length - 1;
+            const lastMessageDate = this.contacts[this.activeUserIndex].messages[lastMessageIndex].date;
+            const lastMessageDay = lastMessageDate.split(' ')[0];
+            if (lastMessageDay == today){
+                return `oggi alle ${lastMessageDate.split(' ')[1]}`; // solo l'orario
+            }
+            return `il ${lastMessageDate}`; // data completa con orario
         }
     }
 });
+
+/*
+//test dayjs metodo format
+const data = dayjs(new Date()).format('D/M/YYYY H:m:s');
+console.log(data);*/
