@@ -34,6 +34,7 @@ body{
     background-color: #eaeaea;
 }
 
+/************/
 /* Sidebar */
 .sidebar{
     width: 350px;
@@ -93,6 +94,35 @@ body{
     color: #4f7485;
 }
 
+/* Sidebar .search-contact */
+.search-contact{
+    height: 50px;
+    padding: 0 6px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+.search-contact > i{
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #b1b1b1;
+}
+.search-contact > input{
+    height: 34px;
+    width: 100%;
+    padding-left: 50px;
+    border: none;
+    border-radius: 5px;
+}
+.search-contact > input:focus{
+    outline: none;
+    border: 1px solid #b1b1b1;
+}
+
+/*********/
 /* Chat */
 .chat{
     width: calc(100% - 350px);
