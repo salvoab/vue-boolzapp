@@ -121,7 +121,7 @@ body{
     border: none;
     border-radius: 5px;
 }
-.search-contact > input:focus{
+.search-contact > input:focus, #to-send:focus{
     outline: none;
     border: 1px solid #b1b1b1;
 }
@@ -175,4 +175,27 @@ body{
 
 .last-access{
     margin-top: 4px;
+}
+
+/* Chat Main */
+.chat-main{
+    height: calc(100% - 80px - 80px);
+    overflow-y: scroll;
+    background-image: url('../img/mine.jpg');
+}
+
+/* Chat Footer */
+.chat-footer{
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #6b7376;
+}
+
+#to-send{
+    resize: none;
+    margin: 0 -24px;
+    padding: 18px 14px;
+    border-radius: 5px;
 }
