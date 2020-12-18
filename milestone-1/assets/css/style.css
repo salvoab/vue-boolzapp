@@ -13,11 +13,11 @@ body{
 }
 
 .background-top{
-    height: 15vh;
+    height: 110px;
     background-color: #009789;
 }
 .background-app{
-    height: 85vh;
+    height: calc(100vh - 110px);
     background-color: #d6dbd7;
 }
 
@@ -40,7 +40,9 @@ body{
     height: 100%;
 }
 
+/* Sidebar Header */
 .sidebar-header{
+    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,6 +61,36 @@ body{
     display: flex;
     justify-content: space-around;
     color: #b1b1b1;
+}
+
+/* Sidebar notifier */
+.notifier{
+    height: 80px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    background-color: #8edafc;
+}
+
+.bell-icon{
+    width: 60px;
+    border-radius: 50%;
+    background-color: #f2fbff;
+    color: #8edafc;
+    text-align: center;
+    padding: 14px 0;
+}
+
+.notifier-info{
+    margin-left: 14px;
+}
+
+.notifier-info > p{
+    font-size: 14px;
+}
+.notifier-info > a{
+    font-size: 12px;
+    color: #4f7485;
 }
 
 /* Chat */
