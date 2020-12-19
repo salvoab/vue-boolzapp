@@ -154,21 +154,24 @@ let app = new Vue({
                     ],
                 },
         ],
-        activeUserIndex: 0
+        selectedContactIndex: 0
     },
     methods: {
-        setActiveUser(position){
-            this.activeUserIndex = position;
+        setSelectedContact(position){
+            this.selectedContactIndex = position;
         },
         getActiveDate(){
             const today = dayjs(new Date()).format('DD/MM/YYYY');
-            const lastMessageIndex = this.contacts[this.activeUserIndex].messages.length - 1;
-            const lastMessageDate = this.contacts[this.activeUserIndex].messages[lastMessageIndex].date;
-            const lastMessageDay = lastMessageDate.split(' ')[0];
-            if (lastMessageDay == today){
-                return `oggi alle ${lastMessageDate.split(' ')[1]}`; // solo l'orario
+            // Prendo tutti i messaggi ricevuti dell'utente selezionato in questo momento
+            const receavedMessages = this.contacts[this.selectedContactIndex].messages.filter(message => message.status === 'received');
+            // Estraggo l'ultimo messaggio ricevuto
+            const lastReceavedMessage = receavedMessages.pop();
+            // La data del giorno è separata con uno spazio dall'orario, quindi prendo solo la data del giorno
+            const lastReceivedMessageDay = lastReceavedMessage.date.split(' ')[0];
+            if (lastReceivedMessageDay == today){
+                return `oggi alle ${lastReceavedMessage.date.split(' ')[1]}`; // solo l'orario
             }
-            return `il ${lastMessageDate}`; // data completa con orario
+            return `il ${lastReceavedMessage.date}`; // data completa con orario
         }
     }
 });

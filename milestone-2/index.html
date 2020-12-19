@@ -52,7 +52,7 @@
                     <!-- .contact-list -->
                     <div class="contact-list">
                         <ul>
-                            <li v-for="(contact, index) in contacts" v-if="contact.visible" @click="setActiveUser(index)">
+                            <li v-for="(contact, index) in contacts" v-if="contact.visible" @click="setSelectedContact(index)">
                                 <img :src="'./assets/img/avatar' + contact.avatar + '.jpg' ">
                                 <div class="contact-info">
                                     <div class="name">{{contact.name}}</div>
@@ -69,9 +69,9 @@
                     <!-- .chat-header -->
                     <div class="chat-header">
                         <div class="user">
-                            <img :src="`./assets/img/avatar${contacts[activeUserIndex].avatar}.jpg`">
+                            <img :src="`./assets/img/avatar${contacts[selectedContactIndex].avatar}.jpg`">
                             <div class="chat-info">
-                                <div class="name">{{contacts[activeUserIndex].name}}</div>
+                                <div class="name">{{contacts[selectedContactIndex].name}}</div>
                                 <div class="last-access">Ultimo accesso {{getActiveDate()}} </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
 
                     <!-- .chat-main -->
                     <div class="chat-main">
-                        <div v-for="message in contacts[activeUserIndex].messages" :class="(message.status === 'sent') ? 'msg-send' : 'msg-received' ">
+                        <div v-for="message in contacts[selectedContactIndex].messages" :class="(message.status === 'sent') ? 'msg-send' : 'msg-received' ">
                             <p>{{message.text}}</p>
                             <div class="time-stamp">{{message.date}}</div>
                         </div>
