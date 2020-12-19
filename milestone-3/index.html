@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Boolzapp</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="./assets/css/style.css">
+    </head>
+    <body>
+        <div id="app">
+            <div class="background-top"></div>
+            <div class="background-app"></div>
+            <div class="container-app">
+                <!-- .sidebar con informazioni utente e lista contatti -->
+                <aside class="sidebar">
+                    <!-- .sidebar-header con informazioni utente e icone -->
+                    <div class="sidebar-header">
+                        <div class="user">
+                            <img src="./assets/img/avatar_io.jpg" alt="mio avatar">
+                            <span>Nome Utente</span>
+                        </div>
+
+                        <div class="box-icons">
+                            <i class="fas fa-circle-notch fa-lg fa-fw"></i>
+                            <i class="fas fa-comment-alt fa-lg fa-fw"></i>
+                            <i class="fas fa-ellipsis-v fa-lg fa-fw"></i>
+                        </div>
+                    </div>
+                    <!-- /.sidebar-header -->
+
+                    <!-- .notifier -->
+                    <div class="notifier">
+                        <div class="bell-icon">
+                            <i class="fas fa-bell-slash fa-2x fa-fw"></i>
+                        </div>
+
+                        <div class="notifier-info">
+                            <p class="info">Ricevi notifiche di nuovi messaggi</p>
+                            <a href="#">Attiva notifiche descktop</a>
+                        </div>
+                    </div>
+                    <!-- /.notifier -->
+
+                    <!-- .search-contact -->
+                    <div class="search-contact">
+                        <i class="fas fa-search fa-lg fa-fw"></i>
+                        <input type="text" placeholder="Cerca o inizia una nuova chat">
+                    </div>
+                    <!-- /.search-contact -->
+
+                    <!-- .contact-list -->
+                    <div class="contact-list">
+                        <ul>
+                            <li v-for="(contact, index) in contacts" v-if="contact.visible" @click="setSelectedContact(index)">
+                                <img :src="'./assets/img/avatar' + contact.avatar + '.jpg' ">
+                                <div class="contact-info">
+                                    <div class="name">{{contact.name}}</div>
+                                    <div class="time-stamp"></div>
+                                    <div class="last-message"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.contact-list -->
+                </aside>
+                <!-- /.sidebar -->
+                <div class="chat">
+                    <!-- .chat-header -->
+                    <div class="chat-header">
+                        <div class="user">
+                            <img :src="`./assets/img/avatar${contacts[selectedContactIndex].avatar}.jpg`">
+                            <div class="chat-info">
+                                <div class="name">{{contacts[selectedContactIndex].name}}</div>
+                                <div class="last-access">Ultimo accesso {{getActiveDate()}} </div>
+                            </div>
+                        </div>
+
+                        <div class="box-icons">
+                            <i class="fas fa-search fa-lg fa-fw"></i>
+                            <i class="fas fa-paperclip fa-lg fa-fw"></i>
+                            <i class="fas fa-ellipsis-v fa-lg fa-fw"></i>
+                        </div>
+                    </div>
+                    <!-- /.chat-header -->
+
+                    <!-- .chat-main -->
+                    <div class="chat-main">
+                        <div v-for="message in contacts[selectedContactIndex].messages" :class="(message.status === 'sent') ? 'msg-send' : 'msg-received' ">
+                            <p>{{message.text}}</p>
+                            <div class="time-stamp">{{message.date}}</div>
+                        </div>
+                    </div>
+                    <!-- /.chat-main -->
+
+                    <div class="chat-footer">
+                        <i class="far fa-smile fa-2x fa-fw"></i>
+                        <textarea name="to-send" id="to-send" cols="90" rows="1" placeholder="Scrivi un messaggio" v-model="textToSend" @keydown.enter.exact.prevent @keyup.enter.exact="sendMessage"></textarea>
+                        <i class="fas fa-microphone fa-2x fa-fw"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+        <script src="./assets/js/main.js"></script>
+    </body>
+</html>
