@@ -216,6 +216,12 @@ let app = new Vue({
                 return lastTextMessage.substr(0,30) + '...';
             }
             return lastTextMessage;
+        },
+        deleteMessage(position){
+            const messageToDelete = this.contacts[this.selectedContactIndex].messages[position];
+            const today = dayjs(new Date()).format('DD/MM/YYYY H:mm:ss');
+            messageToDelete.text = "";
+            messageToDelete.date = "Eliminato il " + today;
         }
     }
 });

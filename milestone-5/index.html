@@ -86,7 +86,7 @@
 
                     <!-- .chat-main -->
                     <div class="chat-main">
-                        <div v-for="message in contacts[selectedContactIndex].messages" class="msg" :class="(message.status === 'sent') ? 'msg-send' : 'msg-received' ">
+                        <div v-for="(message, index) in contacts[selectedContactIndex].messages" class="msg" :class="(message.status === 'sent') ? 'msg-send' : 'msg-received' ">
                             <p>{{message.text}}</p>
                             <div class="time-stamp">{{message.date}}</div>
                             <div class="dropdown">
@@ -94,7 +94,7 @@
                                 <div class="dropdown-menu">
                                     <ul>
                                         <li>Message info</li>
-                                        <li>Delete message</li>
+                                        <li @click="deleteMessage(index)">Delete message</li>
                                     </ul>
                                 </div>
                             </div>
