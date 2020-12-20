@@ -208,8 +208,14 @@ let app = new Vue({
             const lastMessageIndex = this.contacts[position].messages.length - 1;
             return this.contacts[position].messages[lastMessageIndex].date;
         },
-        getPreviewLastMessage(){
-            return '...';
+        getPreviewLastMessage(position){
+            const lastMessageIndex = this.contacts[position].messages.length - 1;
+            const lastTextMessage = this.contacts[position].messages[lastMessageIndex].text;
+            // Restituisco al massimo i primi 30 caratteri eventualmente seguiti da '...'
+            if(lastTextMessage.length > 30){
+                return lastTextMessage.substr(0,30) + '...';
+            }
+            return lastTextMessage;
         }
     }
 });
