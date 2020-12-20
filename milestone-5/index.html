@@ -86,9 +86,18 @@
 
                     <!-- .chat-main -->
                     <div class="chat-main">
-                        <div v-for="message in contacts[selectedContactIndex].messages" :class="(message.status === 'sent') ? 'msg-send' : 'msg-received' ">
+                        <div v-for="message in contacts[selectedContactIndex].messages" class="msg" :class="(message.status === 'sent') ? 'msg-send' : 'msg-received' ">
                             <p>{{message.text}}</p>
                             <div class="time-stamp">{{message.date}}</div>
+                            <div class="dropdown">
+                                <i class="fas fa-chevron-down fa-lg fa-fw"></i>
+                                <div class="dropdown-menu">
+                                    <ul>
+                                        <li>Message info</li>
+                                        <li>Delete message</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.chat-main -->
