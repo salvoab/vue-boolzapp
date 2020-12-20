@@ -56,8 +56,8 @@
                                 <img :src="'./assets/img/avatar' + contact.avatar + '.jpg' ">
                                 <div class="contact-info">
                                     <div class="name">{{contact.name}}</div>
-                                    <div class="time-stamp"></div>
-                                    <div class="last-message"></div>
+                                    <div class="time-stamp">{{getLastDate(index)}}</div>
+                                    <div class="last-message">{{getPreviewLastMessage(index)}}</div>
                                 </div>
                             </li>
                         </ul>

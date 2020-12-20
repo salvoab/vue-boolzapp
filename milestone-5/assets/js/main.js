@@ -203,6 +203,13 @@ let app = new Vue({
                     }
                 });
             }
+        },
+        getLastDate(position){
+            const lastMessageIndex = this.contacts[position].messages.length - 1;
+            return this.contacts[position].messages[lastMessageIndex].date;
+        },
+        getPreviewLastMessage(){
+            return '...';
         }
     }
 });

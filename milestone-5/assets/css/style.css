@@ -145,11 +145,25 @@ body{
 
 .contact-info{
     margin-left: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+.time-stamp, .last-message{
+    margin-top: 5px;
+    text-align: right;
+    font-size: 12px;
+    color: #b6bfbb;
 }
 .name{
     font-size: 20px;
 }
-
+.last-message{
+    width: 100%;
+    text-align: left;
+    margin-top: -15px;
+}
 .contact-list > ul > li > img{
     width: 64px;
     border-radius: 50%;  
@@ -208,13 +222,6 @@ body{
 .msg-received{
     align-self: flex-start;
     background-color: white;
-}
-
-.time-stamp{
-    margin-top: 5px;
-    text-align: right;
-    font-size: 12px;
-    color: #b6bfbb;
 }
 
 /* Chat Footer */
