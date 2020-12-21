@@ -227,17 +227,23 @@ let app = new Vue({
             }
         },
         getLastDate(position){
-            const lastMessageIndex = this.contacts[position].messages.length - 1;
-            return this.contacts[position].messages[lastMessageIndex].date;
+            if(this.contacts[position].messages.length > 0){
+                const lastMessageIndex = this.contacts[position].messages.length - 1;
+                return this.contacts[position].messages[lastMessageIndex].date;
+            }
+            return '';
         },
         getPreviewLastMessage(position){
-            const lastMessageIndex = this.contacts[position].messages.length - 1;
-            const lastTextMessage = this.contacts[position].messages[lastMessageIndex].text;
-            // Restituisco al massimo i primi 30 caratteri eventualmente seguiti da '...'
-            if(lastTextMessage.length > 30){
-                return lastTextMessage.substr(0,30) + '...';
+            if(this.contacts[position].messages.length > 0){
+                const lastMessageIndex = this.contacts[position].messages.length - 1;
+                const lastTextMessage = this.contacts[position].messages[lastMessageIndex].text;
+                // Restituisco al massimo i primi 30 caratteri eventualmente seguiti da '...'
+                if(lastTextMessage.length > 30){
+                    return lastTextMessage.substr(0,30) + '...';
+                }
+                return lastTextMessage;
             }
-            return lastTextMessage;
+            return '';
         },
         deleteMessage(position){
             // Versione con Eliminazione del text del messaggio e sostituzione date
