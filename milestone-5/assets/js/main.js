@@ -23,6 +23,7 @@ let app = new Vue({
                             status: 'received'
                         }
                     ],
+                    lastAccess: '10/01/2020 16:15:22'
                 },
                 {
                     name: 'Fabio',
@@ -45,6 +46,7 @@ let app = new Vue({
                             status: 'sent'
                         }
                     ],
+                    lastAccess: '20/03/2020 16:30:55'
                 },
                 {
                     name: 'Samuele',
@@ -67,6 +69,7 @@ let app = new Vue({
                             status: 'received'
                         }
                     ],
+                    lastAccess: '28/03/2020 16:15:22'
                 },
                 {
                     name: 'Mario',
@@ -84,6 +87,7 @@ let app = new Vue({
                             status: 'received'
                         }
                     ],
+                    lastAccess: '10/01/2020 15:50:00'
                 },
                 {
                     name: 'Franco',
@@ -101,6 +105,7 @@ let app = new Vue({
                             status: 'received'
                         }
                     ],
+                    lastAccess: '15/05/2020 16:50:00'
                 },
                 {
                     name: 'Luisa',
@@ -118,6 +123,7 @@ let app = new Vue({
                             status: 'received'
                         }
                     ],
+                    lastAccess: '20/03/2020 15:57:00'
                 },
                 {
                     name: 'Aldo',
@@ -135,6 +141,7 @@ let app = new Vue({
                             status: 'received'
                         }
                     ],
+                    lastAccess: '10/02/2020 15:50:00'
                 },
                 {
                     name: 'Giovanni',
@@ -152,6 +159,7 @@ let app = new Vue({
                             status: 'received'
                         }
                     ],
+                    lastAccess: '11/01/2020 8:50:00'
                 },
         ],
         selectedContactIndex: 0,
@@ -166,14 +174,32 @@ let app = new Vue({
             const today = dayjs(new Date()).format('DD/MM/YYYY');
             // Prendo tutti i messaggi ricevuti dell'utente selezionato in questo momento
             const receavedMessages = this.contacts[this.selectedContactIndex].messages.filter(message => message.status === 'received');
-            // Estraggo l'ultimo messaggio ricevuto
-            const lastReceavedMessage = receavedMessages.pop();
-            // La data del giorno è separata con uno spazio dall'orario, quindi prendo solo la data del giorno
-            const lastReceivedMessageDay = lastReceavedMessage.date.split(' ')[0];
-            if (lastReceivedMessageDay == today){
-                return `oggi alle ${lastReceavedMessage.date.split(' ')[1]}`; // solo l'orario
+            console.log('Messaggi ricevuti', receavedMessages);
+            // Aggiorno lastAccess solo se ci sono nuovi messaggi ricevuti
+            if(receavedMessages.length > 0){
+                // Estraggo l'ultimo messaggio ricevuto
+                const lastReceavedMessage = receavedMessages.pop();
+                console.log('Ultimo Messaggioricevuto', lastReceavedMessage);
+                // Confronto il precedente lastAccess con la data dell'ultimo messaggio ricevuto
+                const oldLastAccess = dayjs(this.contacts[this.selectedContactIndex].lastAccess);
+                const newLastAccess = dayjs(lastReceavedMessage.date);
+                // Controllo necessario perché potrei aver cancellato l'ultimo messaggio ricevuto e non voglio modificare il lastAccess
+                console.log('oldLastAccess', oldLastAccess);
+                console.log(lastReceavedMessage.date);
+                console.log('newLastAccess', newLastAccess);
+
+                if(newLastAccess.isAfter(oldLastAccess)){
+                    //Aggiorno il lastAccess del contatto
+                    this.contacts[this.selectedContactIndex].lastAccess = lastReceavedMessage.date;
+                }
             }
-            return `il ${lastReceavedMessage.date}`; // data completa con orario
+            
+            const ultimoAccesso = this.contacts[this.selectedContactIndex].lastAccess;
+            const lastReceivedMessageDay = ultimoAccesso.split(' ')[0]; //solo la data senza orario
+            if (lastReceivedMessageDay == today){
+                return `oggi alle ${ultimoAccesso.split(' ')[1]}`; // solo l'orario
+            }
+            return `il ${ultimoAccesso}`; // data completa con orario
         },
         sendMessage(){
             const chatMessages = this.contacts[this.selectedContactIndex].messages;
@@ -218,18 +244,19 @@ let app = new Vue({
             return lastTextMessage;
         },
         deleteMessage(position){
-            const messageToDelete = this.contacts[this.selectedContactIndex].messages[position];
+            // Versione con Eliminazione del text del messaggio e sostituzione date
+            /*const messageToDelete = this.contacts[this.selectedContactIndex].messages[position];
             const today = dayjs(new Date()).format('DD/MM/YYYY H:mm:ss');
             messageToDelete.text = "";
-            messageToDelete.date = "Eliminato il " + today;
+            messageToDelete.date = "Eliminato il " + today;*/
+
+            // Versione con cancellazione totale del messaggio
+            // Con questa versione devo aggiungere la proprietà lastAccess al contatto
+            this.contacts[this.selectedContactIndex].messages.splice(position,1);
         }
     }
 });
 
-/*
-//test dayjs metodo format
-const data = dayjs(new Date()).format('D/M/YYYY H:m:s');
-console.log(data);*/
 
 function autoReply(appObject, contactIndex){
     const replyMessage = {
@@ -240,3 +267,19 @@ function autoReply(appObject, contactIndex){
     //console.log('Sto lavorando sul contatto con indice: ' + contactIndex);
     appObject.contacts[contactIndex].messages.push(replyMessage);
 }
+
+//test dayjs #2
+
+const today = dayjs(new Date());
+const daysAgo = dayjs('11/01/2020 8:50:29');
+const daysAgo2 = dayjs('11/02/2020 8:50:00');
+
+if(today.isAfter(daysAgo)){
+    console.log('Oggi è dopo daysAgo');
+}
+
+if(daysAgo.isBefore(daysAgo2)){
+    console.log('daysAgo è prima di daysAgo2');
+}
+
+console.log('test', daysAgo);
