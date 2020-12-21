@@ -282,7 +282,18 @@ let app = new Vue({
             }
         },
         searchInChat(){
-
+            if(this.searchInput === ''){
+                this.contacts[this.selectedContactIndex].messages.forEach(message => message.visible = true);
+            } else {
+                const stringToFind = this.searchInput.toLowerCase();
+                this.contacts[this.selectedContactIndex].messages.forEach(message => {
+                    if(message.text.toLowerCase().includes(stringToFind)){
+                        message.visible = true;
+                    } else {
+                        message.visible = false;
+                    }
+                });
+            }
         }
     }
 });
