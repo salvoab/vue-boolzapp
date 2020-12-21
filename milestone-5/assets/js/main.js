@@ -174,20 +174,16 @@ let app = new Vue({
             const today = dayjs(new Date()).format('DD/MM/YYYY');
             // Prendo tutti i messaggi ricevuti dell'utente selezionato in questo momento
             const receavedMessages = this.contacts[this.selectedContactIndex].messages.filter(message => message.status === 'received');
-            console.log('Messaggi ricevuti', receavedMessages);
             // Aggiorno lastAccess solo se ci sono nuovi messaggi ricevuti
             if(receavedMessages.length > 0){
                 // Estraggo l'ultimo messaggio ricevuto
                 const lastReceavedMessage = receavedMessages.pop();
-                console.log('Ultimo Messaggioricevuto', lastReceavedMessage);
                 // Confronto il precedente lastAccess con la data dell'ultimo messaggio ricevuto
-                const oldLastAccess = dayjs(this.contacts[this.selectedContactIndex].lastAccess);
-                const newLastAccess = dayjs(lastReceavedMessage.date);
+                const dataIniziale = scambioGiornoConMese(this.contacts[this.selectedContactIndex].lastAccess);
+                const oldLastAccess = dayjs(dataIniziale);
+                const dataNuova = scambioGiornoConMese(lastReceavedMessage.date)
+                const newLastAccess = dayjs(dataNuova);
                 // Controllo necessario perché potrei aver cancellato l'ultimo messaggio ricevuto e non voglio modificare il lastAccess
-                console.log('oldLastAccess', oldLastAccess);
-                console.log(lastReceavedMessage.date);
-                console.log('newLastAccess', newLastAccess);
-
                 if(newLastAccess.isAfter(oldLastAccess)){
                     //Aggiorno il lastAccess del contatto
                     this.contacts[this.selectedContactIndex].lastAccess = lastReceavedMessage.date;
@@ -268,18 +264,12 @@ function autoReply(appObject, contactIndex){
     appObject.contacts[contactIndex].messages.push(replyMessage);
 }
 
-//test dayjs #2
-
-const today = dayjs(new Date());
-const daysAgo = dayjs('11/01/2020 8:50:29');
-const daysAgo2 = dayjs('11/02/2020 8:50:00');
-
-if(today.isAfter(daysAgo)){
-    console.log('Oggi è dopo daysAgo');
+function scambioGiornoConMese(data){
+    let dataSeparata = data.split('/');
+    const giorno = dataSeparata[0];
+    const mese = dataSeparata[1];
+    dataSeparata[0] = mese;
+    dataSeparata[1] = giorno;
+    data = dataSeparata.join('/');
+    return data;
 }
-
-if(daysAgo.isBefore(daysAgo2)){
-    console.log('daysAgo è prima di daysAgo2');
-}
-
-console.log('test', daysAgo);
