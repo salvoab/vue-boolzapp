@@ -92,7 +92,9 @@
                     <!-- .chat-main -->
                     <div class="chat-main">
                         <div v-for="(message, index) in contacts[selectedContactIndex].messages" class="msg" :class="(message.status === 'sent') ? 'msg-send' : 'msg-received' " v-if="message.visible">
-                            <p>{{message.text}}</p>
+                            <p v-if="message.isTextMessage">{{message.text}}</p>
+                            <audio v-else controls :src="message.audio"></audio>
+
                             <div class="time-stamp">{{message.date}}</div>
                             <div class="dropdown">
                                 <i class="fas fa-chevron-down fa-lg fa-fw"></i>
@@ -114,9 +116,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- test audio -->
-            <audio controls></audio>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>

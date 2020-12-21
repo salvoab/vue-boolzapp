@@ -12,18 +12,21 @@ let app = new Vue({
                     visible: true,
                     messages: [
                         {
+                            isTextMessage: true,
                             date: '10/01/2020 15:30:55',
                             text: 'Hai portato a spasso il cane?',
                             status: 'sent',
                             visible: true
                         },
                         {
+                            isTextMessage: true,
                             date: '10/01/2020 15:50:00',
                             text: 'Ricordati di dargli da mangiare',
                             status: 'sent',
                             visible: true
                         },
                         {
+                            isTextMessage: true,
                             date: '10/01/2020 16:15:22',
                             text: 'Tutto fatto!',
                             status: 'received',
@@ -38,18 +41,21 @@ let app = new Vue({
                     visible: true,
                     messages: [
                         {
+                            isTextMessage: true,
                             date: '20/03/2020 16:30:00',
                             text: 'Ciao come stai?',
                             status: 'sent',
                             visible: true
                         },
                         {
+                            isTextMessage: true,
                             date: '20/03/2020 16:30:55',
                             text: 'Bene grazie! Stasera ci vediamo?',
                             status: 'received',
                             visible: true
                         },
                         {
+                            isTextMessage: true,
                             date: '20/03/2020 16:35:00',
                             text: 'Mi piacerebbe ma devo andare a fare la spesa.',
                             status: 'sent',
@@ -64,18 +70,21 @@ let app = new Vue({
                     visible: true,
                     messages: [
                         {
+                            isTextMessage: true,
                             date: '28/03/2020 10:10:40',
                             text: 'La Marianna va in campagna',
                             status: 'received',
                             visible: true
                         },
                         {
+                            isTextMessage: true,
                             date: '28/03/2020 10:20:10',
                             text: 'Sicuro di non aver sbagliato chat?',
                             status: 'sent',
                             visible: true
                         },
                         {
+                            isTextMessage: true,
                             date: '28/03/2020 16:15:22',
                             text: 'Ah scusa!',
                             status: 'received',
@@ -90,12 +99,14 @@ let app = new Vue({
                     visible: true,
                     messages: [
                         {
+                            isTextMessage: true,
                             date: '10/01/2020 15:30:55',
                             text: 'Lo sai che ha aperto una nuova pizzeria?',
                             status: 'sent',
                             visible: true
                         },
                         {
+                            isTextMessage: true,
                             date: '10/01/2020 15:50:00',
                             text: 'Si, ma preferirei andare al cinema',
                             status: 'received',
@@ -110,12 +121,14 @@ let app = new Vue({
                     visible: true,
                     messages: [
                         {
+                            isTextMessage: true,
                             date: '15/05/2020 16:30:55',
                             text: 'Ciao! Che hai fatto di bello ieri?',
                             status: 'sent',
                             visible: true
                         },
                         {
+                            isTextMessage: true,
                             date: '15/05/2020 16:50:00',
                             text: 'Ciao, sono andato al cinema',
                             status: 'received',
@@ -130,12 +143,14 @@ let app = new Vue({
                     visible: true,
                     messages: [
                         {
+                            isTextMessage: true,
                             date: '20/03/2020 15:33:55',
                             text: 'Ciao, avete studiato qualcosa di nuovo ieri?',
                             status: 'sent',
                             visible: true
                         },
                         {
+                            isTextMessage: true,
                             date: '20/03/2020 15:57:00',
                             text: 'Ciao, abbiamo solo fatto un ripasso generale',
                             status: 'received',
@@ -150,12 +165,14 @@ let app = new Vue({
                     visible: true,
                     messages: [
                         {
+                            isTextMessage: true,
                             date: '10/02/2020 15:32:55',
                             text: 'Sei stato al nuovo museo?',
                             status: 'sent',
                             visible: true
                         },
                         {
+                            isTextMessage: true,
                             date: '10/02/2020 15:50:00',
                             text: 'No non ancora, spero di andarci presto',
                             status: 'received',
@@ -170,12 +187,14 @@ let app = new Vue({
                     visible: true,
                     messages: [
                         {
+                            isTextMessage: true,
                             date: '11/01/2020 8:32:55',
                             text: 'Buona giornata!',
                             status: 'sent',
                             visible: true
                         },
                         {
+                            isTextMessage: true,
                             date: '11/01/2020 8:50:00',
                             text: 'Grazie anche a te!',
                             status: 'received',
@@ -239,6 +258,7 @@ let app = new Vue({
         sendMessage(){
             const chatMessages = this.contacts[this.selectedContactIndex].messages;
             const newMessage = {
+                isTextMessage: true,
                 date: dayjs(new Date()).format('DD/MM/YYYY H:mm:ss'),
                 text: this.textToSend,
                 status: 'sent',
@@ -276,12 +296,16 @@ let app = new Vue({
         getPreviewLastMessage(position){
             if(this.contacts[position].messages.length > 0){
                 const lastMessageIndex = this.contacts[position].messages.length - 1;
-                const lastTextMessage = this.contacts[position].messages[lastMessageIndex].text;
-                // Restituisco al massimo i primi 30 caratteri eventualmente seguiti da '...'
-                if(lastTextMessage.length > 30){
-                    return lastTextMessage.substr(0,30) + '...';
+                if(this.contacts[position].messages[lastMessageIndex].isTextMessage){
+                    const lastTextMessage = this.contacts[position].messages[lastMessageIndex].text;
+                    // Restituisco al massimo i primi 30 caratteri eventualmente seguiti da '...'
+                    if(lastTextMessage.length > 30){
+                        return lastTextMessage.substr(0,30) + '...';
+                    }
+                    return lastTextMessage;
+                } else {
+                    return 'Messaggio Audio';
                 }
-                return lastTextMessage;
             }
             return '';
         },
@@ -317,16 +341,24 @@ let app = new Vue({
                 this.mediaRecorder.start();
             
                 this.mediaRecorder.addEventListener("dataavailable", event => {
-                  this.audioChunks.push(event.data);
+                    this.audioChunks.push(event.data);
                 });
             
                 this.mediaRecorder.addEventListener("stop", () => {
-                  const audioBlob = new Blob(this.audioChunks);
-                  this.audioUrl = URL.createObjectURL(audioBlob);
-                  
-                  // audioUrl va nel messaggio
-                  const audioTag = document.querySelector('audio');
-                  audioTag.src = this.audioUrl;
+                    const audioBlob = new Blob(this.audioChunks);
+                    this.audioUrl = URL.createObjectURL(audioBlob);
+                
+                    const audioMessage = {
+                        isTextMessage: false,
+                        date: dayjs(new Date()).format('DD/MM/YYYY H:mm:ss'),
+                        audio: this.audioUrl,
+                        status: 'sent',
+                        visible: true
+                    };
+                    this.contacts[this.selectedContactIndex].messages.push(audioMessage);
+                    // Risposta ok dopo 5 second1
+                    const actualContact = this.selectedContactIndex;
+                    setTimeout(autoReply.bind(null, this, actualContact), 5000);
                 });
             
                 setTimeout(() => {
@@ -342,6 +374,7 @@ let app = new Vue({
 
 function autoReply(appObject, contactIndex){
     const replyMessage = {
+        isTextMessage: true,
         date: dayjs(new Date()).format('DD/MM/YYYY H:mm:ss'),
         text: 'ok',
         status: 'received',
