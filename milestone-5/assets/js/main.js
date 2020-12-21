@@ -246,12 +246,6 @@ let app = new Vue({
             return '';
         },
         deleteMessage(position){
-            // Versione con Eliminazione del text del messaggio e sostituzione date
-            /*const messageToDelete = this.contacts[this.selectedContactIndex].messages[position];
-            const today = dayjs(new Date()).format('DD/MM/YYYY H:mm:ss');
-            messageToDelete.text = "";
-            messageToDelete.date = "Eliminato il " + today;*/
-
             // Versione con cancellazione totale del messaggio
             // Con questa versione devo aggiungere la proprietà lastAccess al contatto
             this.contacts[this.selectedContactIndex].messages.splice(position,1);
