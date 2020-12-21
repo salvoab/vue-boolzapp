@@ -237,7 +237,8 @@ let app = new Vue({
             const newMessage = {
                 date: dayjs(new Date()).format('DD/MM/YYYY H:mm:ss'),
                 text: this.textToSend,
-                status: 'sent'
+                status: 'sent',
+                visible: true
             };
             this.textToSend = '';
             chatMessages.push(newMessage);
