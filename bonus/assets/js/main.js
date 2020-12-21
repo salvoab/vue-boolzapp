@@ -184,6 +184,7 @@ let app = new Vue({
                     lastAccess: '11/01/2020 8:50:00'
                 },
         ],
+        prevSelectedContact: 0,
         selectedContactIndex: 0,
         textToSend: '',
         searchContact: '',
@@ -193,6 +194,16 @@ let app = new Vue({
     methods: {
         setSelectedContact(position){
             this.selectedContactIndex = position;
+            this.resetMessagesVisibility();
+        },
+        resetMessagesVisibility(){
+            // Azzero l'eventuale ricerca nella chat precedente
+            this.searchInputVisible = false;
+            this.searchInput = '';
+            // Rendo visibili tutti i messaggi della chat precedente
+            this.contacts[this.prevSelectedContact].messages.forEach(message => message.visible = true);
+            // Rendo uguali precedente e attuale, così che al prossimo cambio di chat il precedente contatto sia quello attuale
+            this.prevSelectedContact = this.selectedContactIndex;
         },
         getActiveDate(){
             const today = dayjs(new Date()).format('DD/MM/YYYY');
