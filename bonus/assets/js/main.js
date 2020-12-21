@@ -1,5 +1,6 @@
 /*
 Bonus 1: Ricerca in chat. Cliccando sulla lente di ingrandimento compare un input in cui inserire il testo da ricercare in chat
+Bonus 2: Registrare messaggi vocali
 */
 let app = new Vue({
     el: '#app',
@@ -189,7 +190,10 @@ let app = new Vue({
         textToSend: '',
         searchContact: '',
         searchInput: '',
-        searchInputVisible: false
+        searchInputVisible: false,
+        mediaRecorder: null,
+        audioChunks: [],
+        audioUrl: null
     },
     methods: {
         setSelectedContact(position){
@@ -306,6 +310,31 @@ let app = new Vue({
                     }
                 });
             }
+        },
+        recordAudio(){
+            navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+                this.mediaRecorder = new MediaRecorder(stream);
+                this.mediaRecorder.start();
+            
+                this.mediaRecorder.addEventListener("dataavailable", event => {
+                  this.audioChunks.push(event.data);
+                });
+            
+                this.mediaRecorder.addEventListener("stop", () => {
+                  const audioBlob = new Blob(this.audioChunks);
+                  this.audioUrl = URL.createObjectURL(audioBlob);
+                  
+                  // audioUrl va nel messaggio
+                  const audioTag = document.querySelector('audio');
+                  audioTag.src = this.audioUrl;
+                });
+            
+                setTimeout(() => {
+                  this.mediaRecorder.stop();
+                  URL.revokeObjectURL(this.audioUrl);
+                  this.audioChunks.splice(0, this.audioChunks.length);
+                }, 3000);
+            });
         }
     }
 });

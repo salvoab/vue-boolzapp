@@ -110,10 +110,13 @@
                     <div class="chat-footer">
                         <i class="far fa-smile fa-2x fa-fw"></i>
                         <textarea name="to-send" id="to-send" cols="90" rows="1" placeholder="Scrivi un messaggio" v-model="textToSend" @keydown.enter.exact.prevent @keyup.enter.exact="sendMessage"></textarea>
-                        <i class="fas fa-microphone fa-2x fa-fw"></i>
+                        <i class="fas fa-microphone fa-2x fa-fw" @click="recordAudio"></i>
                     </div>
                 </div>
             </div>
+
+            <!-- test audio -->
+            <audio controls></audio>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
