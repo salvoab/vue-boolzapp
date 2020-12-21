@@ -121,7 +121,7 @@ body{
     border: none;
     border-radius: 5px;
 }
-.search-contact > input:focus, #to-send:focus{
+.search-contact > input:focus, #to-send:focus, #search-input:focus{
     outline: none;
     border: 1px solid #b1b1b1;
 }
@@ -195,10 +195,35 @@ body{
     margin-top: 4px;
 }
 
-#search-input{
+.search-input-box{
     width: 260px;
+    height: 30px;
     margin-left: 120px;
+    position: relative;
 }
+
+#search-input{
+    width: 100%;
+    height: 100%;
+    padding-left: 6px;
+    padding-right: 30px;
+    border: none;
+    border-radius: 10px;
+}
+
+.search-input-box > i{
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #b1b1b1;
+}
+
+.search-input-box > i:hover, i.fa-search:hover{
+    cursor: pointer;
+    color: #1E90FF;
+}
+
 
 /* Chat Main */
 .chat-main{

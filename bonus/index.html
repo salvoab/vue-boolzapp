@@ -76,7 +76,10 @@
                             </div>    
                         </div>
 
-                        <input v-if="searchInputVisible" type="text" id="search-input" name="search-input" v-model="searchInput" @keyup="searchInChat">
+                        <div class="search-input-box">
+                            <input v-if="searchInputVisible" type="text" id="search-input" name="search-input" v-model="searchInput" @keyup="searchInChat">
+                            <i v-if="searchInputVisible" class="fas fa-times fa-lg fa-fw" @click="showSearch"></i>
+                        </div>
 
                         <div class="box-icons">
                             <i class="fas fa-search fa-lg fa-fw" @click="showSearch"></i>
