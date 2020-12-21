@@ -363,7 +363,6 @@ let app = new Vue({
             
                 setTimeout(() => {
                   this.mediaRecorder.stop();
-                  URL.revokeObjectURL(this.audioUrl);
                   this.audioChunks.splice(0, this.audioChunks.length);
                 }, 3000);
             });
