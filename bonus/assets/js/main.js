@@ -382,6 +382,9 @@ let app = new Vue({
         if(inputSearchInChat !== null){
             inputSearchInChat.focus();
         }
+        //scroll alla fine della chat
+        const chatMainDiv = document.querySelector('.chat-main');
+        chatMainDiv.scrollTop = chatMainDiv.scrollHeight;
     }
 });
 
