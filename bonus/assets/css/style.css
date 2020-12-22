@@ -325,3 +325,8 @@ body{
     padding: 18px 14px;
     border-radius: 5px;
 }
+
+i.fa-microphone:hover, i.fa-stop:hover{
+    cursor: pointer;
+    color: red;
+}

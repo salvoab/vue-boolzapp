@@ -208,8 +208,11 @@ let app = new Vue({
         selectedContactIndex: 0,
         textToSend: '',
         searchContact: '',
+        // proprietà per la ricerca in chat
         searchInput: '',
         searchInputVisible: false,
+        //proprietà per audio messaggi
+        audioRecording: false,
         mediaRecorder: null,
         audioChunks: [],
         audioUrl: null
@@ -336,6 +339,7 @@ let app = new Vue({
             }
         },
         recordAudio(){
+            this.audioRecording = true;
             navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
                 this.mediaRecorder = new MediaRecorder(stream);
                 this.mediaRecorder.start();
@@ -360,12 +364,14 @@ let app = new Vue({
                     const actualContact = this.selectedContactIndex;
                     setTimeout(autoReply.bind(null, this, actualContact), 5000);
                 });
-            
-                setTimeout(() => {
-                  this.mediaRecorder.stop();
-                  this.audioChunks.splice(0, this.audioChunks.length);
-                }, 3000);
             });
+        },
+        stopAudioRecording(){
+            this.audioRecording = false;
+            // stop registrazione
+            this.mediaRecorder.stop();
+            // svuoto il buffer audio
+            this.audioChunks.splice(0, this.audioChunks.length);
         }
     }
 });

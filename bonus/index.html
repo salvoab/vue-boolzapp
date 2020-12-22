@@ -112,7 +112,8 @@
                     <div class="chat-footer">
                         <i class="far fa-smile fa-2x fa-fw"></i>
                         <textarea name="to-send" id="to-send" cols="90" rows="1" placeholder="Scrivi un messaggio" v-model="textToSend" @keydown.enter.exact.prevent @keyup.enter.exact="sendMessage"></textarea>
-                        <i class="fas fa-microphone fa-2x fa-fw" @click="recordAudio"></i>
+                        <i v-if="!audioRecording" class="fas fa-microphone fa-2x fa-fw" @click="recordAudio"></i>
+                        <i v-else class="fas fa-stop fa-lg fa-fw" @click="stopAudioRecording"></i>
                     </div>
                 </div>
             </div>
