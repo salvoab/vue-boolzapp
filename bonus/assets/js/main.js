@@ -321,7 +321,10 @@ let app = new Vue({
             if(!this.searchInputVisible){
                 this.searchInputVisible = true;
             } else {
-                this.searchInputVisible = false;
+                // voglio nascondere il tag input solo se non c'è scritto nulla 
+                if(this.searchInput === ''){
+                    this.searchInputVisible = false;
+                }
             }
         },
         searchInChat(){
@@ -372,6 +375,12 @@ let app = new Vue({
             this.mediaRecorder.stop();
             // svuoto il buffer audio
             this.audioChunks.splice(0, this.audioChunks.length);
+        }
+    },
+    updated(){
+        const inputSearchInChat = document.getElementById('search-input');
+        if(inputSearchInChat !== null){
+            inputSearchInChat.focus();
         }
     }
 });
