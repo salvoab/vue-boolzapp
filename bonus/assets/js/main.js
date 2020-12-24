@@ -378,9 +378,19 @@ let app = new Vue({
         }
     },
     updated(){
+        // focus a search-input
         const inputSearchInChat = document.getElementById('search-input');
         if(inputSearchInChat !== null){
             inputSearchInChat.focus();
+        }
+        // stile alla X per chiudere search-input quando abilitato
+        const closeIcon = document.querySelector('.search-input-box > i');
+        if(closeIcon !== null){
+            if(this.searchInput === ''){
+                closeIcon.classList.add('close-icon');
+            } else {
+                closeIcon.classList.remove('close-icon');
+            }
         }
         //scroll alla fine della chat
         const chatMainDiv = document.querySelector('.chat-main');

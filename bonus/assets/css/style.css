@@ -219,9 +219,13 @@ body{
     color: #b1b1b1;
 }
 
-.search-input-box > i:hover, i.fa-search:hover{
+.search-input-box > i.close-icon:hover, i.fa-search:hover{
     cursor: pointer;
     color: #1E90FF;
+}
+
+.search-input-box > i.close-icon, i.fa-search{
+    color: #6b7376;
 }
 
 
@@ -326,7 +330,11 @@ body{
     border-radius: 5px;
 }
 
-i.fa-microphone:hover, i.fa-stop:hover{
+i.fa-microphone:hover, i.fa-stop{
     cursor: pointer;
     color: red;
+}
+
+i.fa-stop:hover{
+    color: #1E90FF;
 }
