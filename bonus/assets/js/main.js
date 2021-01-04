@@ -400,10 +400,12 @@ let app = new Vue({
 
 
 function autoReply(appObject, contactIndex){
+    const risposteCasuali = ['Ok', 'Ciao', 'Come stai?', 'Tutto bene?', 'Stasera andiamo al cinema?', 'No, mi dispiace', 'Che fai?', 'Si'];
+    const risposta = risposteCasuali[Math.floor(Math.random() * risposteCasuali.length)];
     const replyMessage = {
         isTextMessage: true,
         date: dayjs(new Date()).format('DD/MM/YYYY H:mm:ss'),
-        text: 'ok',
+        text: risposta,
         status: 'received',
         visible: true
     };
