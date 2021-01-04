@@ -314,6 +314,16 @@ body{
     background-color: rgba(255, 255, 255, 0.8);
 }
 
+/* audio */
+audio {
+    width: 290px;
+}
+audio:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #d5f9ba, 0 0 0 6px black;
+    border-radius: 40px;
+}
+
 /* Chat Footer */
 .chat-footer{
     height: 80px;
